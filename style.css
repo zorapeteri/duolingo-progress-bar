@@ -1,0 +1,104 @@
+#duolingo-progress-bar {
+  margin: 80px 50px 50px;
+  max-width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+  position: relative;
+  scrollbar-width: thin;
+}
+
+#duolingo-progress-bar .skill {
+  display: inline-flex;
+}
+
+#duolingo-progress-bar .skill .circle {
+  position: relative;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s linear;
+}
+
+#duolingo-progress-bar .skill .circle:hover,
+#duolingo-progress-bar .skill .circle:focus-visible {
+  opacity: 0.5;
+}
+
+#duolingo-progress-bar .skill .line {
+  width: 3px;
+  height: 6px;
+  align-self: center;
+  opacity: 0.45;
+}
+
+.duolingo-progress-bar-tooltip {
+  background-color: #f7f7f7;
+  border: 2px solid #e5e5e5;
+  z-index: 10000;
+  position: absolute;
+  top: -70px;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  margin: auto;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  width: fit-content;
+  display: none;
+}
+
+@keyframes slideUp {
+  0% {
+    top: -40px;
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0.3;
+  }
+
+  100% {
+    top: -70px;
+    opacity: 1;
+  }
+}
+
+.duolingo-progress-bar-tooltip.show {
+  display: table;
+  opacity: 1;
+  animation: slideUp 0.15s ease-out;
+}
+
+.duolingo-progress-bar-label {
+  position: absolute;
+  font-size: 0.9rem;
+  color: #3c3c3c;
+  top: -30px;
+}
+
+.duolingo-progress-bar-percentage {
+  left: 50px;
+}
+
+.duolingo-progress-bar-skillCompletion {
+  right: 50px;
+}
+
+@media screen and (max-width: 691px) {
+  #duolingo-progress-bar {
+    margin: 100px 20px 50px;
+  }
+
+  .duolingo-progress-bar-percentage {
+    left: 20px;
+    top: -25px;
+    font-size: 0.8rem;
+  }
+
+  .duolingo-progress-bar-skillCompletion {
+    display: none;
+  }
+}

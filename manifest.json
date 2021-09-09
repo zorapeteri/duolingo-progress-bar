@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "Duolingo Progress Bar",
+  "description": "A linear progress bar for your Duolingo courses",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.duolingo.com/*",
+        "http://www.duolingo.com/*"
+      ],
+      "js": [
+        "intercept.js",
+        "content.js"
+      ],
+      "css": [
+        "scrollbar.css",
+        "style.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
