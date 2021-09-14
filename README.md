@@ -1,6 +1,10 @@
-# duolingo-progress-bar
+# Duolingo Progress Bar
 
 A browser extension that adds a linear progress bar for your Duolingo courses.
+
+## install
+
+[Add to Chrome](https://chrome.google.com/webstore/detail/duolingo-progress-bar/kppleianlialhpkifogjjfldgifhlgpg) | [Add to Firefox](https://addons.mozilla.org/en-US/firefox/addon/duolingo-progress-bar/) | [Add to Edge](https://microsoftedge.microsoft.com/addons/detail/duolingo-progress-bar/jdcgagookeamkohihpcjnalihhbbejgc) 
 
 ## features
 
