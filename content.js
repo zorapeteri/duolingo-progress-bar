@@ -111,7 +111,9 @@ function getPercentage(skills) {
 }
 
 function getSkillCompletion(skills) {
-  return skills.filter((skill) => skill.finishedLevels === skill.levels).length;
+  console.log({ skills });
+  return skills.filter((skill) => skill.finishedLevels === skill.levels - 1)
+    .length;
 }
 
 function removeLastLine() {
