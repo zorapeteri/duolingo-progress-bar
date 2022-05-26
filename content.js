@@ -63,7 +63,10 @@ function skillMouseLeaveListener(tooltip) {
 
 function goToSkill(skill) {
   document.querySelectorAll('[data-test="skill"]').forEach((node) => {
-    if (node.innerText === `${skill.finishedLevels}\n${skill.shortName}`) {
+    if (
+      node.innerText === skill.shortName || 
+      node.innerText === `${skill.finishedLevels}\n${skill.shortName}`
+    ) {
       node.scrollIntoView({ block: 'center', behavior: 'smooth' });
       setTimeout(() => {
         node.querySelector('div[tabindex="0"]').click();
