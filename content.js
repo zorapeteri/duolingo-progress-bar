@@ -47,6 +47,10 @@ function getColor(skill) {
 
 function getLabelText(skill) {
   if (skill.accessible) {
+    if (skill.decayed) {
+      return `${skill.name} (Level ${skill.finishedLevels}, Broken)`;
+    }
+
     if (skill.levels === skill.finishedLevels) {
       return `${skill.name} (Level ${skill.finishedLevels}, Legendary)`;
     }
@@ -94,6 +98,12 @@ function Button(skill, tooltip, color) {
   button.title = skill.accessible ? 'Click to go to skill' : 'This skill is not accessible';
   button.setAttribute('aria-label', `${getLabelText(skill)}. Click to go to skill.`);
   button.style.backgroundColor = color;
+  if (skill.decayed) {
+    const decayGraphic = document.createElement('div');
+    decayGraphic.setAttribute('aria-hidden', 'true');
+    decayGraphic.className = `${classPrefix}decay`;
+    button.appendChild(decayGraphic);
+  }
   const mouseEnterListener = skillMouseEnterListener(skill, tooltip);
   const mouseLeaveListener = skillMouseLeaveListener(tooltip);
   button.addEventListener('mouseenter', mouseEnterListener);
