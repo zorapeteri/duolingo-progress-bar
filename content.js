@@ -5,7 +5,8 @@ const colors = {
   2: '#58CC02',
   3: '#FF4B4B',
   4: '#FF9600',
-  5: '#FFD900',
+  complete: '#FFD900',
+  legendary: '#A9A1FF'
 };
 
 const classPrefix = 'duolingo-progress-bar-';
@@ -33,7 +34,11 @@ function Label(className) {
 function getColor(skill) {
   if (skill.accessible) {
     if (skill.levels === skill.finishedLevels) {
-      return colors[5];
+      return colors.legendary;
+    }
+
+    if (skill.levels - 1 === skill.finishedLevels) {
+      return colors.complete;
     }
     return colors[skill.finishedLevels];
   }
@@ -42,6 +47,14 @@ function getColor(skill) {
 
 function getLabelText(skill) {
   if (skill.accessible) {
+    if (skill.levels === skill.finishedLevels) {
+      return `${skill.name} (Level ${skill.finishedLevels}, Legendary)`;
+    }
+
+    if (skill.levels - 1 === skill.finishedLevels) {
+      return `${skill.name} (Level ${skill.finishedLevels}, Complete)`;
+    }
+
     return `${skill.name} (Level ${skill.finishedLevels})`;
   } else {
     return `${skill.name} (not accessible)`;
@@ -114,7 +127,7 @@ function getPercentage(skills) {
 }
 
 function getSkillCompletion(skills) {
-  return skills.filter((skill) => skill.finishedLevels === skill.levels - 1)
+  return skills.filter((skill) => skill.finishedLevels >= skill.levels - 1)
     .length;
 }
 
