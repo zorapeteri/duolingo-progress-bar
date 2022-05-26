@@ -28,7 +28,7 @@ function interceptData() {
                }
                 var element = document.createElement('div');
                 element.id = '__interceptedRequest';
-                element.innerText = this.response;
+                element.innerText = JSON.stringify(this.response);
                 element.style.display = 'none';
                 document.body.appendChild(element);
             }               
