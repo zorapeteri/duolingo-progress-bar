@@ -1,10 +1,21 @@
 #duolingo-progress-bar {
-  margin: 80px 50px 50px;
+  margin: 20px 50px 50px;
   max-width: 100%;
-  overflow-x: scroll;
+  overflow: hidden;
+  height: 130px;
+  display: flex;
+  align-items: flex-end;
   white-space: nowrap;
   position: relative;
   scrollbar-width: thin;
+}
+
+#duolingo-progress-bar .skills-container {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  padding-bottom: 5px;
 }
 
 #duolingo-progress-bar .skill {
@@ -38,7 +49,7 @@
   border: 2px solid #e5e5e5;
   z-index: 10000;
   position: absolute;
-  top: -70px;
+  top: 0;
   right: 0;
   left: 0;
   padding: 10px;
@@ -52,7 +63,7 @@
 
 @keyframes slideUp {
   0% {
-    top: -40px;
+    top: 40px;
     opacity: 0;
   }
 
@@ -61,7 +72,7 @@
   }
 
   100% {
-    top: -70px;
+    top: 0;
     opacity: 1;
   }
 }
@@ -76,15 +87,15 @@
   position: absolute;
   font-size: 0.9rem;
   color: #3c3c3c;
-  top: -30px;
+  bottom: 55px;
 }
 
 .duolingo-progress-bar-percentage {
-  left: 50px;
+  left: 0;
 }
 
 .duolingo-progress-bar-skillCompletion {
-  right: 50px;
+  right: 0;
 }
 
 @media screen and (max-width: 691px) {

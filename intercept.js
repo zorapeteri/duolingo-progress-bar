@@ -55,6 +55,7 @@ function interceptData() {
           document.querySelector('.duolingo-progress-bar-skillCompletion').remove();
         }
         processSkills(JSON.parse(interceptedRequest.innerText).currentCourse.skills);
+        setupUrlObserver();
       }
     });
   });

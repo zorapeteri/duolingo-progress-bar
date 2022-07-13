@@ -14,6 +14,7 @@ const classPrefix = 'duolingo-progress-bar-';
 function Bar() {
   const bar = document.createElement('div');
   bar.id = 'duolingo-progress-bar';
+  bar.innerHTML = `<div class="skills-container"></div>`;
   if (isFirefox) bar.style.paddingBottom = '10px';
   return bar;
 }
@@ -81,7 +82,7 @@ function skillMouseLeaveListener(tooltip) {
 function goToSkill(skill) {
   document.querySelectorAll('[data-test="skill"]').forEach((node) => {
     if (
-      node.innerText === skill.shortName || 
+      node.innerText === skill.shortName ||
       node.innerText === `${skill.finishedLevels}\n${skill.shortName}`
     ) {
       node.scrollIntoView({ block: 'center', behavior: 'smooth' });
@@ -137,8 +138,7 @@ function getPercentage(skills) {
 }
 
 function getSkillCompletion(skills) {
-  return skills.filter((skill) => skill.finishedLevels >= skill.levels - 1)
-    .length;
+  return skills.filter((skill) => skill.finishedLevels >= skill.levels - 1).length;
 }
 
 function removeLastLine() {
@@ -160,15 +160,28 @@ function processSkills(skills) {
   const tooltip = Tooltip();
   const percentage = Label('percentage');
   percentage.innerText = `${getPercentage(allSkills)}% complete`;
-  bar.parentElement.prepend(percentage);
+  bar.prepend(percentage);
   const skillCompletion = Label('skillCompletion');
   skillCompletion.innerText = `${getSkillCompletion(allSkills)} / ${
     allSkills.length
   } skills complete`;
-  bar.parentElement.prepend(skillCompletion);
+  bar.prepend(skillCompletion);
   allSkills
     .map((skill) => getSkillElement(skill, tooltip))
-    .forEach((node) => bar.appendChild(node));
-  bar.parentElement.prepend(tooltip);
+    .forEach((node) => bar.querySelector('.skills-container').appendChild(node));
+  bar.prepend(tooltip);
   removeLastLine();
+}
+
+function setupUrlObserver() {
+  let lastUrl = location.href;
+  new MutationObserver(() => {
+    const url = location.href;
+    console.log({ pathname: location.pathname });
+    if (url !== lastUrl) {
+      lastUrl = url;
+      document.querySelector('#duolingo-progress-bar').style.display =
+        location.pathname === '/learn' ? 'flex' : 'none';
+    }
+  }).observe(document, { subtree: true, childList: true });
 }
