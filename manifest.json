@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Duolingo Progress Bar",
   "description": "A linear progress bar for your Duolingo courses",
-  "version": "0.3",
+  "version": "0.4",
   "content_scripts": [
     {
       "matches": ["https://www.duolingo.com/*", "http://www.duolingo.com/*"],
