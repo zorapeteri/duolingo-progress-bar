@@ -150,7 +150,6 @@ function insertBar(bar) {
   document
     .querySelector('[data-test="skill-tree"]')
     .parentElement.parentElement.parentElement.parentElement.prepend(bar);
-  bar.parentElement.style.position = 'relative';
 }
 
 function processSkills(skills) {
