@@ -15,7 +15,7 @@ function Bar() {
   const bar = document.createElement('div');
   bar.id = 'duolingo-progress-bar';
   bar.innerHTML = `<div class="skills-container"></div>`;
-  if (isFirefox) bar.style.paddingBottom = '10px';
+  if (isFirefox) bar.classList.add('firefox');
   return bar;
 }
 
