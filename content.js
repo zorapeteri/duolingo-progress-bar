@@ -177,7 +177,6 @@ function setupUrlObserver() {
   let lastUrl = location.href;
   new MutationObserver(() => {
     const url = location.href;
-    console.log({ pathname: location.pathname });
     if (url !== lastUrl) {
       lastUrl = url;
       document.querySelector('#duolingo-progress-bar').style.display =
