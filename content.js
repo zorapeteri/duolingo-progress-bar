@@ -11,6 +11,26 @@ const colors = {
 
 const classPrefix = 'duolingo-progress-bar-';
 
+function waitForElement(selector) {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      if (document.querySelector(selector)) {
+        resolve(document.querySelector(selector));
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+}
+
 function Bar() {
   const bar = document.createElement('div');
   bar.id = 'duolingo-progress-bar';
@@ -152,16 +172,15 @@ function removeLastLine() {
   lines[lines.length - 1].remove();
 }
 
-function insertBar(bar) {
-  document
-    .querySelector('[data-test="skill-tree"]')
-    .parentElement.parentElement.parentElement.parentElement.prepend(bar);
+async function insertBar(bar) {
+  const skillTree = await waitForElement('[data-test="skill-tree"]');
+  skillTree.parentElement.parentElement.parentElement.parentElement.prepend(bar);
 }
 
-function processSkills(skills) {
+async function processSkills(skills) {
   const allSkills = skills.reduce((acc, value) => [...acc, ...value], []);
   const bar = Bar();
-  insertBar(bar);
+  await insertBar(bar);
   const tooltip = Tooltip();
   const labelsContainer = LabelsContainer();
   const percentage = Label('percentage');
@@ -180,12 +199,21 @@ function processSkills(skills) {
   removeLastLine();
 }
 
-function setupUrlObserver() {
+function setupUrlObserver(skills) {
+  if (location.pathname === '/learn' && !window.duolingoProgressBarArrivedOnLearn) {
+    window.duolingoProgressBarArrivedOnLearn = true;
+    processSkills(skills);
+  }
   let lastUrl = location.href;
   new MutationObserver(() => {
     const url = location.href;
     if (url !== lastUrl) {
       lastUrl = url;
+      if (location.pathname === '/learn' && !window.duolingoProgressBarArrivedOnLearn) {
+        window.duolingoProgressBarArrivedOnLearn = true;
+        processSkills(skills);
+        return;
+      }
       document.querySelector('#duolingo-progress-bar').style.display =
         location.pathname === '/learn' ? 'flex' : 'none';
     }
