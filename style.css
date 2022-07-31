@@ -4,7 +4,10 @@
   overflow: hidden;
   height: 130px;
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
+  justify-content: flex-end;
+  gap: 10px;
   white-space: nowrap;
   position: relative;
   scrollbar-width: thin;
@@ -83,19 +86,12 @@
   animation: slideUp 0.15s ease-out;
 }
 
-.duolingo-progress-bar-label {
-  position: absolute;
+.duolingo-progress-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   font-size: 0.9rem;
   color: #3c3c3c;
-  bottom: 55px;
-}
-
-.duolingo-progress-bar-percentage {
-  left: 0;
-}
-
-.duolingo-progress-bar-skillCompletion {
-  right: 0;
 }
 
 @media screen and (max-width: 691px) {
@@ -103,9 +99,7 @@
     margin: 100px 20px 50px;
   }
 
-  .duolingo-progress-bar-percentage {
-    left: 20px;
-    top: -25px;
+  .duolingo-progress-bar-labels {
     font-size: 0.8rem;
   }
 

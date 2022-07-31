@@ -32,6 +32,12 @@ function Label(className) {
   return label;
 }
 
+function LabelsContainer() {
+  const labelsContainer = document.createElement('div');
+  labelsContainer.className = `${classPrefix}labels`;
+  return labelsContainer;
+}
+
 function getColor(skill) {
   if (skill.accessible) {
     if (skill.levels === skill.finishedLevels) {
@@ -157,14 +163,16 @@ function processSkills(skills) {
   const bar = Bar();
   insertBar(bar);
   const tooltip = Tooltip();
+  const labelsContainer = LabelsContainer();
   const percentage = Label('percentage');
   percentage.innerText = `${getPercentage(allSkills)}% complete`;
-  bar.prepend(percentage);
+  labelsContainer.appendChild(percentage);
   const skillCompletion = Label('skillCompletion');
   skillCompletion.innerText = `${getSkillCompletion(allSkills)} / ${
     allSkills.length
   } skills complete`;
-  bar.prepend(skillCompletion);
+  labelsContainer.appendChild(skillCompletion);
+  bar.prepend(labelsContainer);
   allSkills
     .map((skill) => getSkillElement(skill, tooltip))
     .forEach((node) => bar.querySelector('.skills-container').appendChild(node));
